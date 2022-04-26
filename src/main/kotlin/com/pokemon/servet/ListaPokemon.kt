@@ -16,7 +16,6 @@ class ListaPokemon(var listaPokemon : MutableList<Pokemon> = mutableListOf()) {
             val lista = gson.fromJson(File(filePath).readText(), ListaPokemon::class.java)
             return lista
         }
-
     }
 
     fun agregar(pokemon: Pokemon) {
@@ -54,6 +53,49 @@ class ListaPokemon(var listaPokemon : MutableList<Pokemon> = mutableListOf()) {
             encontrado
         }
 
+        return ListaPokemon(listaFiltrada.toMutableList())
+    }
+
+    fun buscarPokemonMasPequeno() : Pokemon {
+        val listaFiltrada = listaPokemon.sortedBy {
+            it.height
+        }
+        return listaFiltrada.first()
+    }
+
+    fun buscarPokemonMasAlto() : Pokemon {
+        val listaFiltrada = listaPokemon.sortedBy {
+            it.height
+        }
+        return listaFiltrada.last()
+    }
+
+    fun buscarPokemonMasGordo() : Pokemon {
+        val listaFiltrada = listaPokemon.sortedBy {
+            it.weight
+        }
+        return listaFiltrada.last()
+    }
+
+    fun buscarPokemonMasGordoPorPeso(peso: Int) : ListaPokemon {
+        val listaFiltrada = listaPokemon.filter {
+            it.weight > peso
+        }
+        return ListaPokemon(listaFiltrada.toMutableList())
+    }
+
+    fun buscarPokemonMasGordoPorTipo(tipoBuscado: String): ListaPokemon{
+        val listaFiltrada = listaPokemon.filter { pokemon ->
+            var encontrado = false
+            pokemon.types.forEach {  tipo ->
+                if (tipo.type.name == tipoBuscado)
+                    encontrado = true
+            }
+            encontrado
+        }
+        val lista = listaFiltrada.sortedBy {
+            it.weight
+        }
         return ListaPokemon(listaFiltrada.toMutableList())
     }
 

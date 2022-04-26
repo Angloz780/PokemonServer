@@ -8,11 +8,12 @@ import org.springframework.boot.runApplication
 class ServetApplication
 
 var gson =  Gson()
+var listaPokemon = ListaPokemon()
 
 fun main(args: Array<String>) {
 	runApplication<ServetApplication>(*args)
 
-	val listaPokemon = if(ListaPokemon.fileExist()){
+	listaPokemon = if(ListaPokemon.fileExist()){
 		ListaPokemon.cargarListaPokemonDeFichero()
 	}else{
 		ObtenerPokemonRequest.get()
