@@ -3,7 +3,6 @@ package com.pokemon.servet
 import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
-@Serializable
 data class Pokemon (
     val abilities: List<Ability>,
 
@@ -20,7 +19,7 @@ data class Pokemon (
     @SerializedName("held_items")
     val heldItems: List<HeldItem>,
 
-    val id: Long,
+    val id: Int,
 
     @SerializedName("is_default")
     val isDefault: Boolean,
