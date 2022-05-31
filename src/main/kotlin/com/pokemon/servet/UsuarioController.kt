@@ -140,30 +140,26 @@ class UsuarioController (private  val usuarioRepository: UsuarioRepository) {
                     if (usuario2.token == tokenUsuario2){
 
                         usuario1.pokeCapturas.forEach {id1->
-                            listaPokemon.listaPokemon.forEach {encon1->
-                                if (encon1.id == id1){
+                            if (id1 == pokemonId1){
 
-                                    usuario2.pokeCapturas.forEach { id2->
-                                        listaPokemon.listaPokemon.forEach { encon2->
-                                            if (encon2.id == id2){
+                                usuario2.pokeCapturas.forEach { id2->
+                                    if (id2 == pokemonId2){
 
-                                                usuario1.pokeCapturas.remove(id1)
-                                                usuario1.pokeCapturas.add(id2)
-                                                usuarioRepository.save(usuario1)
+                                        usuario1.pokeCapturas.remove(id1)
+                                        usuario1.pokeCapturas.add(id2)
+                                        usuarioRepository.save(usuario1)
 
-                                                usuario2.pokeCapturas.remove(id2)
-                                                usuario2.pokeCapturas.add(id1)
-                                                usuarioRepository.save(usuario2)
+                                        usuario2.pokeCapturas.remove(id2)
+                                        usuario2.pokeCapturas.add(id1)
+                                        usuarioRepository.save(usuario2)
 
-                                                return "Intercambio realizado"
-                                            }
-                                        }
+                                        return "Intercambio realizado"
                                     }
-                                    return "El pokemon2 no existe"
                                 }
+                                return "El usuario2 no tiene este pokemon2"
                             }
                         }
-                        return "El pokemon1 no existe"
+                        return "El usuario1 no tiene este pokemon1"
                     }
                 }
                 return "El token del usuario2 no existe"
@@ -172,4 +168,5 @@ class UsuarioController (private  val usuarioRepository: UsuarioRepository) {
         return "El token del usuario1 no existe"
     }
 }
+
 
